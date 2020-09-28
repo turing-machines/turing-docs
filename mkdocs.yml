@@ -1,9 +1,9 @@
-site_name: Turing Docs for the Community
+site_name: Turing Community Documentation
 theme:
   name: material
   palette:
-    primary: blue
-    accent: lightblue
+    primary: grey
+    accent: cyan
     icon:
       repo: fontawesome/brands/github
   font: false
