@@ -1,0 +1,18 @@
+site_name: GCP Professional Cloud Architect 2020 Notes
+theme:
+  name: material
+  palette:
+    primary: blue
+    accent: lightblue
+    icon:
+      repo: fontawesome/brands/github
+  font: false
+repo_url: https://github.com/turing-machines/turing-docs
+repo_name: turing-machines/turing-docs
+markdown_extensions:
+  - pymdownx.highlight:
+      use_pygments: true
+plugins:
+  - search
+  - git-revision-date
+
