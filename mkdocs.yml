@@ -18,4 +18,9 @@ plugins:
 nav:
    - Home: 'index.md'
    - FAQ: 'FAQ/index.md'
+   - Kubernetes:
+      - 'Installation': 'Kubernetes/Installation.md'
+      - 'Persistent Volume': 'Kubernetes/PersistentVolume.md'
+      - 'Add a worker': 'Kubernetes/AddWorker.md'
+      - 'K8S Upgrade': 'Kubernetes/K8SUpgrade.md'
 

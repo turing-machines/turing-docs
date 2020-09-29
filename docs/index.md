@@ -4,7 +4,7 @@
 
 Turing Pi is a private mobile cloud in a mini ITX form factor. It’s a scale model of bare metal clusters like you see in data centers. Turing Pi cluster board can scale up to 7 compute nodes.
 
-### Specs:
+### Specs
 
 * 1 Gbps Ethernet
 * 7 x 40 pin GPIO
@@ -13,7 +13,7 @@ Turing Pi is a private mobile cloud in a mini ITX form factor. It’s a scale mo
 * Up to 28 cores
 * Up to 7 GB RAM
 
-### Features:
+### Features
 
 * Flash mode - flash RPi compute modules through the board
 * Boot mode - boot OS through eMMC or SD card or netboot
