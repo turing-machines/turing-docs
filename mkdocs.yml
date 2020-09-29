@@ -12,7 +12,4 @@ repo_name: turing-machines/turing-docs
 markdown_extensions:
   - pymdownx.highlight:
       use_pygments: true
-plugins:
-  - search
-  - git-revision-date
 
