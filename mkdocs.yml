@@ -2,8 +2,8 @@ site_name: Turing Community Documentation
 theme:
   name: material
   palette:
-    primary: grey
-    accent: cyan
+    primary: amber
+    accent: amber
     icon:
       repo: fontawesome/brands/github
   font: false
@@ -12,4 +12,15 @@ repo_name: turing-machines/turing-docs
 markdown_extensions:
   - pymdownx.highlight:
       use_pygments: true
-
+plugins:
+  - search
+  - git-revision-date
+nav:
+   - Home: 'index.md'
+   - FAQ: 'FAQ/index.md'
+   - Kubernetes:
+      - 'Installation': 'Kubernetes/Installation.md'
+      - 'K8S Upgrade': 'Kubernetes/K8SUpgrade.md'
+      - 'Add a worker': 'Kubernetes/AddWorker.md'
+      - 'Persistent Volume': 'Kubernetes/PersistentVolume.md'
+      - 'Deploy Flannel': 'Kubernetes/DeployFlannel.md'
