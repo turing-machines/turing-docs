@@ -24,6 +24,3 @@ nav:
       - 'Add a worker': 'Kubernetes/AddWorker.md'
       - 'Persistent Volume': 'Kubernetes/PersistentVolume.md'
       - 'Deploy Flannel': 'Kubernetes/DeployFlannel.md'
-      
-      
-
