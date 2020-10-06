@@ -1,0 +1,828 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.1">
+    
+    
+      
+        <title>Deploy Flannel - Turing Community Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f72e892.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffc105">
+        
+      
+    
+    
+    
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="amber" data-md-color-accent="amber">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deploy-flannel-in-turing-pi" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="Turing Community Documentation" class="md-header-nav__button md-logo" aria-label="Turing Community Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Turing Community Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Deploy Flannel
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/turing-machines/turing-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    turing-machines/turing-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Turing Community Documentation" class="md-nav__button md-logo" aria-label="Turing Community Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Turing Community Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/turing-machines/turing-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    turing-machines/turing-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Kubernetes
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Kubernetes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Installation/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../K8SUpgrade/" title="K8S Upgrade" class="md-nav__link">
+      K8S Upgrade
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../AddWorker/" title="Add a worker" class="md-nav__link">
+      Add a worker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../PersistentVolume/" title="Persistent Volume" class="md-nav__link">
+      Persistent Volume
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Deploy Flannel
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Deploy Flannel" class="md-nav__link md-nav__link--active">
+      Deploy Flannel
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#key-aspects" class="md-nav__link">
+    Key Aspects
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flannel" class="md-nav__link">
+    Flannel
+  </a>
+  
+    <nav class="md-nav" aria-label="Flannel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-through-kubectl" class="md-nav__link">
+    Setup through kubectl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flannel-issue-2-multiple-interfaces" class="md-nav__link">
+    Flannel issue 2: Multiple interfaces
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-through-kubectl_1" class="md-nav__link">
+    Setup through kubectl
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calico" class="md-nav__link">
+    Calico
+  </a>
+  
+    <nav class="md-nav" aria-label="Calico">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-calico-for-raspberry-pi" class="md-nav__link">
+    Compile Calico for Raspberry PI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-on-raspberry-pi" class="md-nav__link">
+    Deploy on Raspberry PI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    Results
+  </a>
+  
+    <nav class="md-nav" aria-label="Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reference-links" class="md-nav__link">
+    Reference Links
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#key-aspects" class="md-nav__link">
+    Key Aspects
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flannel" class="md-nav__link">
+    Flannel
+  </a>
+  
+    <nav class="md-nav" aria-label="Flannel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup-through-kubectl" class="md-nav__link">
+    Setup through kubectl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flannel-issue-2-multiple-interfaces" class="md-nav__link">
+    Flannel issue 2: Multiple interfaces
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setup-through-kubectl_1" class="md-nav__link">
+    Setup through kubectl
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calico" class="md-nav__link">
+    Calico
+  </a>
+  
+    <nav class="md-nav" aria-label="Calico">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compile-calico-for-raspberry-pi" class="md-nav__link">
+    Compile Calico for Raspberry PI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-on-raspberry-pi" class="md-nav__link">
+    Deploy on Raspberry PI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    Results
+  </a>
+  
+    <nav class="md-nav" aria-label="Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reference-links" class="md-nav__link">
+    Reference Links
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/turing-machines/turing-docs/edit/master/docs/Kubernetes/DeployFlannel.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="deploy-flannel-in-turing-pi">Deploy Flannel in Turing Pi</h1>
+<p>In order to get the nodes and pods interface with each other accross the cluster.
+This post describes how I deployed Flannel acounting with the fact that some of the
+nodes have multiple interfaces (wlan0 and eth0).</p>
+<h2 id="key-aspects">Key Aspects</h2>
+<ul>
+<li>Flannel seems to deploy ok. Looks like in trouble when multiple interfaces available</li>
+<li>Calico in not compiled by default for Rapsberry PI</li>
+</ul>
+<h2 id="flannel">Flannel</h2>
+<h3 id="setup-through-kubectl">Setup through kubectl</h3>
+<p>The kubectl deployment file for flannel and adapted to kubedge is available here:
+Note: Be sure to have picked the right branch (arm32v7 or arm64v8) when pulling kube-deployment</p>
+<pre><code class="bash">cd $HOME
+cp -r proj/kubedge/kubedge_utils/kube-deployment/ .
+
+cd kube-deployment/flannel/
+kubectl apply -f flannel.yaml
+
+
+### Flannel Issue 1: flannel.1. Link has incompatible address
+
+on master-pi, both the WLAN and LAN interfaces were activated. After unplugging the CAT5,
+behavior was similar. Moreover this had some impact on the kube-apiserver (see the number of restarts).
+
+```bash
+$ kubectl get all --all-namespaces
+
+NAMESPACE     NAME                                             READY     STATUS             RESTARTS   AGE
+default       pod/helm-rpi-kubeplay-arm32v7-6cb66496c6-9w97m   1/1       Running            0          4h
+kube-system   pod/coredns-78fcdf6894-cw5p8                     1/1       Running            15         10d
+kube-system   pod/coredns-78fcdf6894-czjcj                     1/1       Running            15         10d
+kube-system   pod/etcd-master-pi                               1/1       Running            11         10d
+kube-system   pod/kube-apiserver-master-pi                     1/1       Running            599        10d
+kube-system   pod/kube-controller-manager-master-pi            1/1       Running            38         10d
+kube-system   pod/kube-flannel-ds-bhllh                        1/1       Running            13         9d
+kube-system   pod/kube-flannel-ds-q7cp2                        0/1       CrashLoopBackOff   401        9d
+kube-system   pod/kube-flannel-ds-wqxsz                        1/1       Running            16         9d
+kube-system   pod/kube-proxy-4chwh                             1/1       Running            9          9d
+kube-system   pod/kube-proxy-6r5mn                             1/1       Running            5          9d
+kube-system   pod/kube-proxy-vvj6j                             1/1       Running            11         10d
+kube-system   pod/kube-scheduler-master-pi                     1/1       Running            13         10d
+kube-system   pod/kubernetes-dashboard-7d59788d44-rchkk        1/1       Running            20         7d
+kube-system   pod/tiller-deploy-b59fcc885-66l7s                1/1       Running            0          6h
+</code></pre>
+
+<pre><code class="bash">$ kubectl logs pod/kube-flannel-ds-q7cp2 -n kube-system
+
+I0716 00:42:46.596796       1 main.go:474] Determining IP address of default interface
+I0716 00:42:46.598043       1 main.go:487] Using interface with name wlan0 and address 192.168.1.95
+I0716 00:42:46.598138       1 main.go:504] Defaulting external address to interface address (192.168.1.95)
+I0716 00:42:46.775936       1 kube.go:283] Starting kube subnet manager
+I0716 00:42:46.775907       1 kube.go:130] Waiting 10m0s for node controller to sync
+I0716 00:42:47.776280       1 kube.go:137] Node controller sync successful
+I0716 00:42:47.776400       1 main.go:234] Created subnet manager: Kubernetes Subnet Manager - master-pi
+I0716 00:42:47.776431       1 main.go:237] Installing signal handlers
+I0716 00:42:47.776697       1 main.go:352] Found network config - Backend type: vxlan
+I0716 00:42:47.776900       1 vxlan.go:119] VXLAN config: VNI=1 Port=0 GBP=false DirectRouting=false
+E0716 00:42:47.778884       1 main.go:279] Error registering network: failed to configure interface flannel.1: link has incompatible addresses. Remove additional addresses and try again....
+I0716 00:42:47.778991       1 main.go:332] Stopping shutdownHandler...
+</code></pre>
+
+<p>Deleting the pod, did not help. After recreation same issue reappeared.</p>
+<pre><code class="bash">$ kubectl delete pod/kube-flannel-ds-q7cp2 -n kube-system
+</code></pre>
+
+<pre><code class="bash">$ kubectl get all --all-namespaces
+
+NAMESPACE     NAME                                             READY     STATUS    RESTARTS   AGE
+kube-system   pod/kube-flannel-ds-z7w4f                        0/1       Error     1          17s
+</code></pre>
+
+<p>Deleting the interface flannel.1 interface actually worked:</p>
+<pre><code class="bash">$ sudo ip link delete flannel.1
+</code></pre>
+
+<pre><code class="bash">$ kubectl get all --all-namespaces
+
+NAMESPACE     NAME                                             READY     STATUS    RESTARTS   AGE
+kube-system   pod/kube-flannel-ds-z7w4f                        1/1       Running   5          3m
+</code></pre>
+
+<pre><code class="bash">$ kubectl logs pod/kube-flannel-ds-z7w4f -n kube-system
+
+I0716 00:52:14.555290       1 main.go:474] Determining IP address of default interface
+I0716 00:52:14.564490       1 main.go:487] Using interface with name wlan0 and address 192.168.1.95
+I0716 00:52:14.564578       1 main.go:504] Defaulting external address to interface address (192.168.1.95)
+I0716 00:52:14.802491       1 kube.go:130] Waiting 10m0s for node controller to sync
+I0716 00:52:14.802544       1 kube.go:283] Starting kube subnet manager
+I0716 00:52:15.803114       1 kube.go:137] Node controller sync successful
+I0716 00:52:15.803308       1 main.go:234] Created subnet manager: Kubernetes Subnet Manager - master-pi
+I0716 00:52:15.803909       1 main.go:237] Installing signal handlers
+I0716 00:52:15.804662       1 main.go:352] Found network config - Backend type: vxlan
+I0716 00:52:15.804985       1 vxlan.go:119] VXLAN config: VNI=1 Port=0 GBP=false DirectRouting=false
+I0716 00:52:15.875242       1 main.go:299] Wrote subnet file to /run/flannel/subnet.env
+I0716 00:52:15.875367       1 main.go:303] Running backend.
+I0716 00:52:15.875489       1 main.go:321] Waiting for all goroutines to exit
+I0716 00:52:15.875559       1 vxlan_network.go:56] watching for new subnet leases
+</code></pre>
+
+<h3 id="flannel-issue-2-multiple-interfaces">Flannel issue 2: Multiple interfaces</h3>
+<p>Some of the PI have two interfaces running: wlan0 and eth0. The internal cluster network is using eth0.
+We need to force Flannel to use it.</p>
+<h3 id="setup-through-kubectl_1">Setup through kubectl</h3>
+<p>Realize I was using v0.9.1 instead of v0.10.0. Let's update the file</p>
+<pre><code class="bash">$ mkdir -p $HOME/kube-deployments/flannel
+$ cd $HOME/kube-deployments/flannel
+$ curl -sSL https://rawgit.com/coreos/flannel/v0.10.0/Documentation/kube-flannel.yml | sed &quot;s/amd64/arm/g&quot; &gt; flannel.yaml
+</code></pre>
+
+<p>Let's add --iface=eth0 to the flanneld to in the flannel.yaml</p>
+<pre><code class="bash"></code></pre>
+
+<p>Let's update flannel from 0.9.1 to 0.10.0 at the same time we specify which interface to use.</p>
+<pre><code class="bash">$ kubectl apply -f flannel.yaml
+
+clusterrole.rbac.authorization.k8s.io/flannel configured
+clusterrolebinding.rbac.authorization.k8s.io/flannel configured
+serviceaccount/flannel unchanged
+configmap/kube-flannel-cfg configured
+daemonset.extensions/kube-flannel-ds configured
+</code></pre>
+
+<p>It seems it solved the flannel issue. The bug in kube 1.11.0 still there (restart of kube-apiserver)
+Will update to 1.11.1 when it is published</p>
+<pre><code class="bash">$ kubectl get all --all-namespaces
+
+NAMESPACE     NAME                                        READY     STATUS             RESTARTS   AGE
+kube-system   pod/coredns-78fcdf6894-bn6wl                1/1       Running            0          6d
+kube-system   pod/coredns-78fcdf6894-k52xb                1/1       Running            0          6d
+kube-system   pod/etcd-kubemaster-pi                      1/1       Running            3          6d
+kube-system   pod/kube-apiserver-kubemaster-pi            1/1       Running            3          6d
+kube-system   pod/kube-controller-manager-kubemaster-pi   0/1       CrashLoopBackOff   1740       6d
+kube-system   pod/kube-flannel-ds-62fz9                   1/1       Running            984        6d
+kube-system   pod/kube-flannel-ds-gwzdt                   1/1       Running            0          6d
+kube-system   pod/kube-flannel-ds-h7ln5                   1/1       Running            0          6d
+kube-system   pod/kube-flannel-ds-qs9lf                   1/1       Running            0          6d
+kube-system   pod/kube-flannel-ds-vwsjk                   1/1       Running            0          6d
+kube-system   pod/kube-proxy-45z5s                        1/1       Running            0          6d
+kube-system   pod/kube-proxy-4trsd                        1/1       Running            0          6d
+kube-system   pod/kube-proxy-ksj7c                        1/1       Running            4          6d
+kube-system   pod/kube-proxy-t7gmc                        1/1       Running            0          6d
+kube-system   pod/kube-proxy-tfmqb                        1/1       Running            0          6d
+kube-system   pod/kube-scheduler-kubemaster-pi            1/1       Running            4          6d
+
+NAMESPACE     NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)         AGE
+default       service/kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP         6d
+kube-system   service/kube-dns     ClusterIP   10.96.0.10   &lt;none&gt;        53/UDP,53/TCP   6d
+
+NAMESPACE     NAME                             DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR                 AGE
+kube-system   daemonset.apps/kube-flannel-ds   5         5         5         5            5           beta.kubernetes.io/arch=arm   6d
+kube-system   daemonset.apps/kube-proxy        5         5         5         5            5           beta.kubernetes.io/arch=arm   6d
+
+NAMESPACE     NAME                      DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+kube-system   deployment.apps/coredns   2         2         2            2           6d
+
+NAMESPACE     NAME                                 DESIRED   CURRENT   READY     AGE
+kube-system   replicaset.apps/coredns-78fcdf6894   2         2         2         6d
+</code></pre>
+
+<pre><code class="bash">$ kubectl logs pod/kube-flannel-ds-62fz9 -n kube-system
+
+I0714 14:34:26.719081       1 main.go:474] Determining IP address of default interface
+I0714 14:34:26.728184       1 main.go:487] Using interface with name wlan0 and address 192.168.1.94
+I0714 14:34:26.728273       1 main.go:504] Defaulting external address to interface address (192.168.1.94)
+I0714 14:34:26.942686       1 kube.go:283] Starting kube subnet manager
+I0714 14:34:26.943203       1 kube.go:130] Waiting 10m0s for node controller to sync
+I0714 14:34:27.943672       1 kube.go:137] Node controller sync successful
+I0714 14:34:27.943771       1 main.go:234] Created subnet manager: Kubernetes Subnet Manager - kubemaster-pi
+I0714 14:34:27.943819       1 main.go:237] Installing signal handlers
+I0714 14:34:27.944064       1 main.go:352] Found network config - Backend type: vxlan
+I0714 14:34:27.944222       1 vxlan.go:119] VXLAN config: VNI=1 Port=0 GBP=false DirectRouting=false
+I0714 14:34:28.004675       1 main.go:299] Wrote subnet file to /run/flannel/subnet.env
+I0714 14:34:28.004748       1 main.go:303] Running backend.
+I0714 14:34:28.004880       1 main.go:321] Waiting for all goroutines to exit
+I0714 14:34:28.004931       1 vxlan_network.go:56] watching for new subnet leases
+I0714 14:34:28.049933       1 iptables.go:114] Some iptables rules are missing; deleting and recreating rules
+I0714 14:34:28.050202       1 iptables.go:136] Deleting iptables rule: -s 10.244.0.0/16 -j ACCEPT
+I0714 14:34:28.053918       1 iptables.go:114] Some iptables rules are missing; deleting and recreating rules
+I0714 14:34:28.054003       1 iptables.go:136] Deleting iptables rule: -s 10.244.0.0/16 -d 10.244.0.0/16 -j RETURN
+I0714 14:34:28.057332       1 iptables.go:136] Deleting iptables rule: -d 10.244.0.0/16 -j ACCEPT
+I0714 14:34:28.061665       1 iptables.go:136] Deleting iptables rule: -s 10.244.0.0/16 ! -d 224.0.0.0/4 -j MASQUERADE
+I0714 14:34:28.066452       1 iptables.go:124] Adding iptables rule: -s 10.244.0.0/16 -j ACCEPT
+I0714 14:34:28.069910       1 iptables.go:136] Deleting iptables rule: ! -s 10.244.0.0/16 -d 10.244.0.0/24 -j RETURN
+I0714 14:34:28.075067       1 iptables.go:136] Deleting iptables rule: ! -s 10.244.0.0/16 -d 10.244.0.0/16 -j MASQUERADE
+I0714 14:34:28.078310       1 iptables.go:124] Adding iptables rule: -d 10.244.0.0/16 -j ACCEPT
+I0714 14:34:28.082389       1 iptables.go:124] Adding iptables rule: -s 10.244.0.0/16 -d 10.244.0.0/16 -j RETURN
+I0714 14:34:28.098375       1 iptables.go:124] Adding iptables rule: -s 10.244.0.0/16 ! -d 224.0.0.0/4 -j MASQUERADE
+I0714 14:34:28.111379       1 iptables.go:124] Adding iptables rule: ! -s 10.244.0.0/16 -d 10.244.0.0/24 -j RETURN
+I0714 14:34:28.122424       1 iptables.go:124] Adding iptables rule: ! -s 10.244.0.0/16 -d 10.244.0.0/16 -j MASQUERADE
+</code></pre>
+
+<h2 id="calico">Calico</h2>
+<h3 id="compile-calico-for-raspberry-pi">Compile Calico for Raspberry PI</h3>
+<ul>
+<li>WIP</li>
+</ul>
+<h3 id="deploy-on-raspberry-pi">Deploy on Raspberry PI</h3>
+<ul>
+<li>WIP</li>
+</ul>
+<h2 id="results">Results</h2>
+<ul>
+<li>WIP</li>
+</ul>
+<h3 id="reference-links">Reference Links</h3>
+<ul>
+<li><a href="https://github.com/coreos/flannel/issues/883">Flannel Issue</a></li>
+<li><a href="https://stackoverflow.com/questions/47845739/configuring-flannel-to-use-a-non-default-interface-in-kubernetes">Flannel Issue2</a></li>
+<li><a href="https://github.com/coreos/flannel/issues/620">Flannel Issue3</a></li>
+</ul>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: 2020-09-29
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../PersistentVolume/" title="Persistent Volume" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Persistent Volume
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="../../assets/javascripts/bundle.aa3f9871.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

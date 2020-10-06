@@ -1,0 +1,945 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.1">
+    
+    
+      
+        <title>K8S Upgrade - Turing Community Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f72e892.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffc105">
+        
+      
+    
+    
+    
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="amber" data-md-color-accent="amber">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#upgrade-tutorial" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="Turing Community Documentation" class="md-header-nav__button md-logo" aria-label="Turing Community Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Turing Community Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              K8S Upgrade
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/turing-machines/turing-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    turing-machines/turing-docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Turing Community Documentation" class="md-nav__button md-logo" aria-label="Turing Community Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Turing Community Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/turing-machines/turing-docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    turing-machines/turing-docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../FAQ/" title="FAQ" class="md-nav__link">
+      FAQ
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Kubernetes
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Kubernetes" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Kubernetes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Installation/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        K8S Upgrade
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="K8S Upgrade" class="md-nav__link md-nav__link--active">
+      K8S Upgrade
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#control-plane-node-upgrade-using-kubeadm" class="md-nav__link">
+    Control plane node upgrade using kubeadm
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrade-kubectl" class="md-nav__link">
+    Upgrade kubectl
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrade-kubelet-on-control-plane-node" class="md-nav__link">
+    Upgrade kubelet on control plane node
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-first-worker-node" class="md-nav__link">
+    Update first worker node
+  </a>
+  
+    <nav class="md-nav" aria-label="Update first worker node">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#other-worker-node" class="md-nav__link">
+    Other worker node
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-consistency-of-the-cluster" class="md-nav__link">
+    Check consistency of the cluster
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-links" class="md-nav__link">
+    Reference Links
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../AddWorker/" title="Add a worker" class="md-nav__link">
+      Add a worker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../PersistentVolume/" title="Persistent Volume" class="md-nav__link">
+      Persistent Volume
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../DeployFlannel/" title="Deploy Flannel" class="md-nav__link">
+      Deploy Flannel
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#control-plane-node-upgrade-using-kubeadm" class="md-nav__link">
+    Control plane node upgrade using kubeadm
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrade-kubectl" class="md-nav__link">
+    Upgrade kubectl
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrade-kubelet-on-control-plane-node" class="md-nav__link">
+    Upgrade kubelet on control plane node
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-first-worker-node" class="md-nav__link">
+    Update first worker node
+  </a>
+  
+    <nav class="md-nav" aria-label="Update first worker node">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#other-worker-node" class="md-nav__link">
+    Other worker node
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-consistency-of-the-cluster" class="md-nav__link">
+    Check consistency of the cluster
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-links" class="md-nav__link">
+    Reference Links
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/turing-machines/turing-docs/edit/master/docs/Kubernetes/K8SUpgrade.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="upgrade-tutorial">Upgrade tutorial</h1>
+<h2 id="control-plane-node-upgrade-using-kubeadm">Control plane node upgrade using kubeadm</h2>
+<pre><code class="bash"># apt-mark unhold kubeadm &amp;&amp; \
+&gt; apt-get update &amp;&amp; apt-get install -y kubeadm &amp;&amp; \
+&gt; apt-mark hold kubeadm
+kubeadm was already not hold.
+Hit:2 http://raspbian.raspberrypi.org/raspbian stretch InRelease
+Hit:3 https://download.docker.com/linux/raspbian stretch InRelease
+Hit:1 https://packages.cloud.google.com/apt kubernetes-xenial InRelease
+Hit:5 http://archive.raspberrypi.org/debian stretch InRelease
+Hit:4 https://packagecloud.io/Hypriot/rpi/debian stretch InRelease
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following packages will be upgraded:
+  kubeadm
+1 upgraded, 0 newly installed, 0 to remove and 38 not upgraded.
+Need to get 8,095 kB of archives.
+After this operation, 3,100 kB disk space will be freed.
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial/main armhf kubeadm armhf 1.12.0-00 [8,095 kB]
+Fetched 8,095 kB in 4s (1,962 kB/s)
+(Reading database ... 30574 files and directories currently installed.)
+Preparing to unpack .../kubeadm_1.12.0-00_armhf.deb ...
+Unpacking kubeadm (1.12.0-00) over (1.11.1-00) ...
+Setting up kubeadm (1.12.0-00) ...
+kubeadm set on hold.
+</code></pre>
+
+<pre><code class="bash">sudo kubeadm upgrade plan
+[preflight] Running pre-flight checks.
+[upgrade] Making sure the cluster is healthy:
+[upgrade/config] Making sure the configuration is correct:
+[upgrade/config] Reading configuration from the cluster...
+[upgrade/config] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -oyaml'
+[upgrade] Fetching available versions to upgrade to
+[upgrade/versions] Cluster version: v1.11.0
+[upgrade/versions] kubeadm version: v1.12.0
+[upgrade/versions] Latest stable version: v1.12.0
+[upgrade/versions] Latest version in the v1.11 series: v1.11.3
+
+Components that must be upgraded manually after you have upgraded the control plane with 'kubeadm upgrade apply':
+COMPONENT   CURRENT       AVAILABLE
+Kubelet     3 x v1.11.1   v1.11.3
+
+Upgrade to the latest version in the v1.11 series:
+
+COMPONENT            CURRENT   AVAILABLE
+API Server           v1.11.0   v1.11.3
+Controller Manager   v1.11.0   v1.11.3
+Scheduler            v1.11.0   v1.11.3
+Kube Proxy           v1.11.0   v1.11.3
+CoreDNS              1.1.3     1.2.2
+Etcd                 3.2.18    3.2.18
+
+You can now apply the upgrade by executing the following command:
+
+        kubeadm upgrade apply v1.11.3
+
+_____________________________________________________________________
+
+Components that must be upgraded manually after you have upgraded the control plane with 'kubeadm upgrade apply':
+COMPONENT   CURRENT       AVAILABLE
+Kubelet     3 x v1.11.1   v1.12.0
+
+Upgrade to the latest stable version:
+
+COMPONENT            CURRENT   AVAILABLE
+API Server           v1.11.0   v1.12.0
+Controller Manager   v1.11.0   v1.12.0
+Scheduler            v1.11.0   v1.12.0
+Kube Proxy           v1.11.0   v1.12.0
+CoreDNS              1.1.3     1.2.2
+Etcd                 3.2.18    3.2.24
+
+You can now apply the upgrade by executing the following command:
+
+        kubeadm upgrade apply v1.12.0
+
+_____________________________________________________________________
+</code></pre>
+
+<pre><code class="bash">$ sudo kubeadm upgrade apply v1.12.0
+[preflight] Running pre-flight checks.
+[upgrade] Making sure the cluster is healthy:
+[upgrade/config] Making sure the configuration is correct:
+[upgrade/config] Reading configuration from the cluster...
+[upgrade/config] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -oyaml'
+[upgrade/apply] Respecting the --cri-socket flag that is set with higher priority than the config file.
+[upgrade/version] You have chosen to change the cluster version to &quot;v1.12.0&quot;
+[upgrade/versions] Cluster version: v1.11.0
+[upgrade/versions] kubeadm version: v1.12.0
+[upgrade/confirm] Are you sure you want to proceed with the upgrade? [y/N]: y
+[upgrade/prepull] Will prepull images for components [kube-apiserver kube-controller-manager kube-scheduler etcd]
+[upgrade/prepull] Prepulling image for component kube-apiserver.
+[upgrade/prepull] Prepulling image for component kube-controller-manager.
+[upgrade/prepull] Prepulling image for component kube-scheduler.
+[upgrade/prepull] Prepulling image for component etcd.
+[apiclient] Found 0 Pods for label selector k8s-app=upgrade-prepull-kube-apiserver
+[apiclient] Found 0 Pods for label selector k8s-app=upgrade-prepull-etcd
+[apiclient] Found 0 Pods for label selector k8s-app=upgrade-prepull-kube-controller-manager
+[apiclient] Found 0 Pods for label selector k8s-app=upgrade-prepull-kube-scheduler
+[apiclient] Found 1 Pods for label selector k8s-app=upgrade-prepull-kube-scheduler
+[apiclient] Found 1 Pods for label selector k8s-app=upgrade-prepull-kube-apiserver
+[apiclient] Found 1 Pods for label selector k8s-app=upgrade-prepull-kube-controller-manager
+[apiclient] Found 1 Pods for label selector k8s-app=upgrade-prepull-etcd
+[upgrade/prepull] Prepulled image for component etcd.
+[upgrade/prepull] Prepulled image for component kube-apiserver.
+[upgrade/prepull] Prepulled image for component kube-controller-manager.
+[upgrade/prepull] Prepulled image for component kube-scheduler.
+[upgrade/prepull] Successfully prepulled the images for all the control plane components
+[upgrade/apply] Upgrading your Static Pod-hosted control plane to version &quot;v1.12.0&quot;...
+Static pod: kube-apiserver-master-pi hash: c30b2fa49c49e091538b2ce8e4dae186
+Static pod: kube-controller-manager-master-pi hash: 22f67939f8b1abea8ba99666b78b5c93
+Static pod: kube-scheduler-master-pi hash: 0e545194d6b033abd681f02dfd11f4c8
+Static pod: etcd-master-pi hash: 00575b778fb80d4e48241f80ceb2ac0f
+[etcd] Wrote Static Pod manifest for a local etcd instance to &quot;/etc/kubernetes/tmp/kubeadm-upgraded-manifests040184315/etcd.yaml&quot;
+[upgrade/staticpods] Moved new manifest to &quot;/etc/kubernetes/manifests/etcd.yaml&quot; and backed up old manifest to &quot;/etc/kubernetes/tmp/kubeadm-backup-manifests-2018-09-30-00-46-56/etcd.yaml&quot;
+[upgrade/staticpods] Waiting for the kubelet to restart the component
+[upgrade/staticpods] This might take a minute or longer depending on the component/version gap (timeout 5m0s
+Static pod: etcd-master-pi hash: 00575b778fb80d4e48241f80ceb2ac0f
+Static pod: etcd-master-pi hash: 00575b778fb80d4e48241f80ceb2ac0f
+Static pod: etcd-master-pi hash: 00575b778fb80d4e48241f80ceb2ac0f
+Static pod: etcd-master-pi hash: 77c6076a4d6ee044b744b041125cf918
+[apiclient] Found 1 Pods for label selector component=etcd
+[upgrade/staticpods] Component &quot;etcd&quot; upgraded successfully!
+[upgrade/etcd] Waiting for etcd to become available
+[util/etcd] Waiting 0s for initial delay
+[util/etcd] Attempting to see if all cluster endpoints are available 1/10
+[upgrade/staticpods] Writing new Static Pod manifests to &quot;/etc/kubernetes/tmp/kubeadm-upgraded-manifests040184315&quot;
+[controlplane] wrote Static Pod manifest for component kube-apiserver to &quot;/etc/kubernetes/tmp/kubeadm-upgraded-manifests040184315/kube-apiserver.yaml&quot;
+[controlplane] wrote Static Pod manifest for component kube-controller-manager to &quot;/etc/kubernetes/tmp/kubeadm-upgraded-manifests040184315/kube-controller-manager.yaml&quot;
+[controlplane] wrote Static Pod manifest for component kube-scheduler to &quot;/etc/kubernetes/tmp/kubeadm-upgraded-manifests040184315/kube-scheduler.yaml&quot;
+[upgrade/staticpods] Moved new manifest to &quot;/etc/kubernetes/manifests/kube-apiserver.yaml&quot; and backed up old manifest to &quot;/etc/kubernetes/tmp/kubeadm-backup-manifests-2018-09-30-00-46-56/kube-apiserver.yaml&quot;
+[upgrade/staticpods] Waiting for the kubelet to restart the component
+[upgrade/staticpods] This might take a minute or longer depending on the component/version gap (timeout 5m0s
+Static pod: kube-apiserver-master-pi hash: c30b2fa49c49e091538b2ce8e4dae186
+Static pod: kube-apiserver-master-pi hash: a92106d6db4c8b5835a47f5f56c33fdb
+[apiclient] Found 1 Pods for label selector component=kube-apiserver
+[upgrade/staticpods] Component &quot;kube-apiserver&quot; upgraded successfully!
+[upgrade/staticpods] Moved new manifest to &quot;/etc/kubernetes/manifests/kube-controller-manager.yaml&quot; and backed up old manifest to &quot;/etc/kubernetes/tmp/kubeadm-backup-manifests-2018-09-30-00-46-56/kube-controller-manager.yaml&quot;
+[upgrade/staticpods] Waiting for the kubelet to restart the component
+[upgrade/staticpods] This might take a minute or longer depending on the component/version gap (timeout 5m0s
+Static pod: kube-controller-manager-master-pi hash: 22f67939f8b1abea8ba99666b78b5c93
+Static pod: kube-controller-manager-master-pi hash: 980b4156606df8caafd0ad8abacc1485
+[apiclient] Found 1 Pods for label selector component=kube-controller-manager
+[upgrade/staticpods] Component &quot;kube-controller-manager&quot; upgraded successfully!
+[upgrade/staticpods] Moved new manifest to &quot;/etc/kubernetes/manifests/kube-scheduler.yaml&quot; and backed up old manifest to &quot;/etc/kubernetes/tmp/kubeadm-backup-manifests-2018-09-30-00-46-56/kube-scheduler.yaml&quot;
+[upgrade/staticpods] Waiting for the kubelet to restart the component
+[upgrade/staticpods] This might take a minute or longer depending on the component/version gap (timeout 5m0s
+Static pod: kube-scheduler-master-pi hash: 0e545194d6b033abd681f02dfd11f4c8
+Static pod: kube-scheduler-master-pi hash: 1b5ec5be325bf29f60be62789416a99e
+[apiclient] Found 1 Pods for label selector component=kube-scheduler
+[upgrade/staticpods] Component &quot;kube-scheduler&quot; upgraded successfully!
+[uploadconfig] storing the configuration used in ConfigMap &quot;kubeadm-config&quot; in the &quot;kube-system&quot; Namespace
+[kubelet] Creating a ConfigMap &quot;kubelet-config-1.12&quot; in namespace kube-system with the configuration for the kubelets in the cluster
+[kubelet] Downloading configuration for the kubelet from the &quot;kubelet-config-1.12&quot; ConfigMap in the kube-system namespace
+[kubelet] Writing kubelet configuration to file &quot;/var/lib/kubelet/config.yaml&quot;
+[patchnode] Uploading the CRI Socket information &quot;/var/run/dockershim.sock&quot; to the Node API object &quot;master-pi&quot; as an annotation
+[bootstraptoken] configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstraptoken] configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstraptoken] configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
+[upgrade/successful] SUCCESS! Your cluster was upgraded to &quot;v1.12.0&quot;. Enjoy!
+
+[upgrade/kubelet] Now that your control plane is upgraded, please proceed with upgrading your kubelets if you haven't already done so.
+</code></pre>
+
+<p>Kubernetes servers are running v1.12</p>
+<pre><code class="bash">$ kubectl version
+Client Version: version.Info{Major:&quot;1&quot;, Minor:&quot;11&quot;, GitVersion:&quot;v1.11.1&quot;, GitCommit:&quot;b1b29978270dc22fecc592ac55d903350454310a&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2018-07-17T18:53:20Z&quot;, GoVersion:&quot;go1.10.3&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/arm&quot;}
+Server Version: version.Info{Major:&quot;1&quot;, Minor:&quot;12&quot;, GitVersion:&quot;v1.12.0&quot;, GitCommit:&quot;0ed33881dc4355495f623c6f22e7dd0b7632b7c0&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2018-09-27T16:55:41Z&quot;, GoVersion:&quot;go1.10.4&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/arm&quot;}
+</code></pre>
+
+<p>my kubelets are still running kubernetes v1.11.1</p>
+<pre><code class="bash">$ kubectl get nodes
+NAME        STATUS    ROLES     AGE       VERSION
+home-pi     Ready     &lt;none&gt;    86d       v1.11.1
+master-pi   Ready     master    86d       v1.11.1
+nas-pi      Ready     &lt;none&gt;    85d       v1.11.1
+</code></pre>
+
+<h2 id="upgrade-kubectl">Upgrade kubectl</h2>
+<p>Install newer version of kubectl using apt-get</p>
+<pre><code class="bash">$ sudo apt-get install kubectl
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following packages will be upgraded:
+  kubectl
+1 upgraded, 0 newly installed, 0 to remove and 37 not upgraded.
+Need to get 8,639 kB of archives.
+After this operation, 1,783 kB of additional disk space will be used.
+Get:1 https://packages.cloud.google.com/apt kubernetes-xenial/main armhf kubectl armhf 1.12.0-00 [8,639 kB]
+Fetched 8,639 kB in 6s (1,270 kB/s)
+(Reading database ... 30574 files and directories currently installed.)
+Preparing to unpack .../kubectl_1.12.0-00_armhf.deb ...
+Unpacking kubectl (1.12.0-00) over (1.11.1-00) ...
+Setting up kubectl (1.12.0-00) ...
+</code></pre>
+
+<p>Check that kubectl is now 1.12</p>
+<pre><code class="bash">$ kubectl version
+Client Version: version.Info{Major:&quot;1&quot;, Minor:&quot;12&quot;, GitVersion:&quot;v1.12.0&quot;, GitCommit:&quot;0ed33881dc4355495f623c6f22e7dd0b7632b7c0&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2018-09-27T17:05:32Z&quot;, GoVersion:&quot;go1.10.4&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/arm&quot;}
+Server Version: version.Info{Major:&quot;1&quot;, Minor:&quot;12&quot;, GitVersion:&quot;v1.12.0&quot;, GitCommit:&quot;0ed33881dc4355495f623c6f22e7dd0b7632b7c0&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2018-09-27T16:55:41Z&quot;, GoVersion:&quot;go1.10.4&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/arm&quot;}
+</code></pre>
+
+<h2 id="upgrade-kubelet-on-control-plane-node">Upgrade kubelet on control plane node</h2>
+<pre><code class="bash">$ sudo apt-get upgrade -y kubelet
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Calculating upgrade... Done
+The following packages will be upgraded:
+...
+</code></pre>
+
+<pre><code class="bash">$ sudo systemctl restart kubelet
+</code></pre>
+
+<pre><code class="bash">$ kubectl get nodes
+NAME        STATUS   ROLES    AGE   VERSION
+home-pi     Ready    &lt;none&gt;   86d   v1.11.1
+master-pi   Ready    master   86d   v1.12.0
+nas-pi      Ready    &lt;none&gt;   85d   v1.11.1
+</code></pre>
+
+<p>Looks that as useual something is wrong with flannel CNI</p>
+<pre><code class="bash">$ kubectl get all --all-namespaces
+NAMESPACE     NAME                                             READY   STATUS    RESTARTS   AGE
+default       pod/helm-rpi-kubeplay-arm32v7-6cb66496c6-6gvf6   1/1     Running   0          60d
+kube-system   pod/coredns-576cbf47c7-nzhfj                     1/1     Running   0          37m
+kube-system   pod/coredns-576cbf47c7-wkmhr                     1/1     Running   0          37m
+kube-system   pod/etcd-master-pi                               1/1     Running   0          3m43s
+kube-system   pod/kube-apiserver-master-pi                     1/1     Running   2          3m43s
+kube-system   pod/kube-controller-manager-master-pi            1/1     Running   1          3m43s
+kube-system   pod/kube-flannel-ds-4495g                        1/1     Running   4          75d
+kube-system   pod/kube-flannel-ds-52ssk                        0/1     Error     10         75d
+kube-system   pod/kube-flannel-ds-gj65n                        1/1     Running   4          75d
+
+Investigation shows:
+
+```bash
+$ kubectl logs pod/kube-flannel-ds-52ssk -n kube-system
+I0930 01:34:13.768925       1 main.go:475] Determining IP address of default interface
+I0930 01:34:13.778622       1 main.go:488] Using interface with name wlan0 and address 192.168.1.95
+I0930 01:34:13.778716       1 main.go:505] Defaulting external address to interface address (192.168.1.95)
+I0930 01:34:14.168318       1 kube.go:131] Waiting 10m0s for node controller to sync
+I0930 01:34:14.168890       1 kube.go:294] Starting kube subnet manager
+I0930 01:34:15.169929       1 kube.go:138] Node controller sync successful
+I0930 01:34:15.170035       1 main.go:235] Created subnet manager: Kubernetes Subnet Manager - master-pi
+I0930 01:34:15.170064       1 main.go:238] Installing signal handlers
+I0930 01:34:15.170415       1 main.go:353] Found network config - Backend type: vxlan
+I0930 01:34:15.170797       1 vxlan.go:120] VXLAN config: VNI=1 Port=0 GBP=false DirectRouting=false
+E0930 01:34:15.256843       1 main.go:280] Error registering network: failed to configure interface flannel.1: failed to ensure address of interface flannel.1: link has incompatible addresses. Remove additional addresses and try again. &amp;netlink.Vxlan{LinkAttrs:netlink.LinkAttrs{Index:5, MTU:1450, TxQLen:0, Name:&quot;flannel.1&quot;, HardwareAddr:net.HardwareAddr{0x26, 0xd5, 0xd0, 0xdd, 0x56, 0x1a},
+...
+</code></pre>
+
+<p>Let's apply usual receipe
+``bash
+sudo ip link delete flannel.1</p>
+<pre><code>
+Brute force fix seems to have done the fix....This is lucky we don't have production traffic on that node.
+```bash
+$ kubectl get pods -n kube-system
+NAME                                    READY   STATUS    RESTARTS   AGE
+coredns-576cbf47c7-nzhfj                1/1     Running   0          51m
+coredns-576cbf47c7-wkmhr                1/1     Running   0          51m
+etcd-master-pi                          1/1     Running   0          17m
+kube-apiserver-master-pi                1/1     Running   2          17m
+kube-controller-manager-master-pi       1/1     Running   1          17m
+kube-flannel-ds-4495g                   1/1     Running   4          75d
+kube-flannel-ds-52ssk                   1/1     Running   13         75d
+kube-flannel-ds-gj65n                   1/1     Running   4          75d
+kube-proxy-c2264                        1/1     Running   0          51m
+kube-proxy-snjsg                        1/1     Running   0          49m
+kube-proxy-zgqjb                        1/1     Running   1          50m
+kube-scheduler-master-pi                1/1     Running   1          17m
+kubernetes-dashboard-7d59788d44-rchkk   1/1     Running   25         83d
+tiller-deploy-b59fcc885-dbvlv           1/1     Running   0          60d
+</code></pre>
+
+<h2 id="update-first-worker-node">Update first worker node</h2>
+<pre><code class="bash">sudo apt-get clean
+sudo apt-get update
+sudo apt-get install kubeadm
+sudo apt-get install kubelet
+sudo kubeadm upgrade node config --kubelet-version $(kubelet --version | cut -d ' ' -f 2)
+sudo systemctl restart kubelet
+</code></pre>
+
+<p>Same flannel issue</p>
+<pre><code class="bash">$ kubectl get pods -n kube-system
+NAME                                    READY   STATUS             RESTARTS   AGE
+coredns-576cbf47c7-nzhfj                1/1     Running            0          87m
+coredns-576cbf47c7-wkmhr                1/1     Running            1          87m
+etcd-master-pi                          1/1     Running            0          53m
+kube-apiserver-master-pi                1/1     Running            2          53m
+kube-controller-manager-master-pi       1/1     Running            1          53m
+kube-flannel-ds-4495g                   0/1     CrashLoopBackOff   10         75d
+...
+</code></pre>
+
+<p>same hack to fix the issue</p>
+<pre><code class="bash">sudo ip link delete flannel.1
+</code></pre>
+
+<p>same hack seems to be effective</p>
+<pre><code class="bash">$ kubectl get pods -n kube-system
+NAME                                    READY   STATUS    RESTARTS   AGE
+coredns-576cbf47c7-nzhfj                1/1     Running   0          111m
+coredns-576cbf47c7-wkmhr                1/1     Running   1          111m
+etcd-master-pi                          1/1     Running   0          77m
+kube-apiserver-master-pi                1/1     Running   2          77m
+kube-controller-manager-master-pi       1/1     Running   1          77m
+kube-flannel-ds-4495g                   1/1     Running   11         75d
+...
+</code></pre>
+
+<h3 id="other-worker-node">Other worker node</h3>
+<pre><code>sudo apt-get clean
+sudo apt-get update
+sudo apt-get install kubeadm
+sudo apt-get install kubelet
+sudo kubeadm upgrade node config --kubelet-version $(kubelet --version | cut -d ' ' -f 2)
+sudo systemctl restart kubelet
+sudo ip link delete flannel.1
+</code></pre>
+
+<h2 id="check-consistency-of-the-cluster">Check consistency of the cluster</h2>
+<pre><code class="bash">$ kubectl get pods -n kube-system
+NAME                                    READY   STATUS    RESTARTS   AGE
+coredns-576cbf47c7-nzhfj                1/1     Running   1          143m
+coredns-576cbf47c7-wkmhr                1/1     Running   1          143m
+etcd-master-pi                          1/1     Running   0          109m
+kube-apiserver-master-pi                1/1     Running   2          109m
+kube-controller-manager-master-pi       1/1     Running   1          109m
+kube-flannel-ds-4495g                   1/1     Running   11         76d
+kube-flannel-ds-52ssk                   1/1     Running   13         76d
+kube-flannel-ds-gj65n                   1/1     Running   13         76d
+kube-proxy-c2264                        1/1     Running   1          143m
+kube-proxy-snjsg                        1/1     Running   1          141m
+kube-proxy-zgqjb                        1/1     Running   1          142m
+kube-scheduler-master-pi                1/1     Running   1          109m
+kubernetes-dashboard-7d59788d44-rchkk   1/1     Running   25         83d
+tiller-deploy-b59fcc885-dbvlv           1/1     Running   0          60d
+</code></pre>
+
+<pre><code class="bash">$ kubectl get nodes
+NAME        STATUS   ROLES    AGE   VERSION
+home-pi     Ready    &lt;none&gt;   86d   v1.12.0
+master-pi   Ready    master   86d   v1.12.0
+nas-pi      Ready    &lt;none&gt;   86d   v1.12.0
+</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+<li>At a glance, the cluster seems to be healthy</li>
+<li>I still need to find sometool like sonobuoy to validate that the cluster is healthy</li>
+</ul>
+<h2 id="reference-links">Reference Links</h2>
+<ul>
+<li><a href="https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade-1-12/">Official Upgrade documentation</a></li>
+</ul>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: 2020-09-29
+    
+  </small>
+</div>
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../Installation/" title="Installation" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Installation
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../AddWorker/" title="Add a worker" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Add a worker
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="../../assets/javascripts/bundle.aa3f9871.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
